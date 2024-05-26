@@ -1,18 +1,31 @@
+import { FaUserCircle } from "react-icons/fa";
 import useAuth from "../../hooks/use-auth";
 
 export default function Dashboard() {
   const auth = useAuth();
+
+  const userName = auth?.user?.displayName;
+  const email = auth?.user?.email;
+  const profilePicture = auth?.user?.photoURL;
+
   return (
-    <div className="flex justify-center items-center h-screen ">
-      <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-200 p-6">
-        <img
-          className="w-24 h-24 rounded-full mx-auto"
-          src={auth?.user?.profilePicture}
-          alt={auth?.user?.name}
-        />
+    <div className=" m-8 h-screen ">
+      <h2 className=" text-3xl pb-2 text-gray-200 font-bold">Profile</h2>
+      <div className="max-w-md rounded overflow-hidden shadow-lg  p-6">
+        {profilePicture ? (
+          <img
+            className="w-24 h-24 rounded-full mx-auto"
+            src={profilePicture}
+            alt={userName || "User profile image"}
+          />
+        ) : (
+          <FaUserCircle className="h-8 w-8 mx-auto" />
+        )}
         <div className="text-center mt-4">
-          <h2 className="text-xl font-semibold">{auth?.user?.name}</h2>
-          <p className="text-gray-600">{auth?.user?.email}</p>
+          <h2 className="text-xl font-semibold">
+            {userName ? userName : "Unname User"}
+          </h2>
+          <p className="text-gray-600">Email: {email}</p>
           <p className="text-gray-600">{}</p>
         </div>
       </div>

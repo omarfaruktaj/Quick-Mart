@@ -20,7 +20,7 @@ export default function EditProduct() {
         ...data,
       });
       navigate("/dashboard/products");
-      toast.success("Product successfully updated.");
+      toast.success("Product successfully  updated.");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);

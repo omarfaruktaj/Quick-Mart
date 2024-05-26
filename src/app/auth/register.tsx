@@ -41,9 +41,7 @@ export default function Register() {
   return (
     <div className="max-w-md w-full rounded-md shadow-md p-6 space-y-8">
       <div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Register
-        </h2>
+        <h2 className="mt-6 text-center text-3xl font-extrabold ">Register</h2>
       </div>
       <form className="mt-8  space-y-6" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full space-y-6">
