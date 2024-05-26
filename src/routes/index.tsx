@@ -4,6 +4,11 @@ import Home from "../app/root/home";
 import AuthLayout from "../app/auth/auth-layout";
 import Register from "../app/auth/register";
 import Login from "../app/auth/login";
+import PrivateRoute from "./private/private-route";
+import Dashboard from "../app/dashboard/dashboard";
+import DashboardLayout from "../app/dashboard/dashboard-layout";
+import DashboardProducts from "../app/dashboard/products";
+import Products from "../app/root/products";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <Home />,
+        element: <Products />,
       },
       {
         path: "",
@@ -35,6 +40,25 @@ const router = createBrowserRouter([
             element: <Login />,
           },
         ],
+      },
+    ],
+  },
+
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
+      {
+        path: "products",
+        element: <DashboardProducts />,
       },
     ],
   },

@@ -1,6 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import useAuth from "../../hooks/use-auth";
+import useAuth from "../hooks/use-auth";
 
 export default function SocialLogin() {
   const auth = useAuth();

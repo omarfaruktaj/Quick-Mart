@@ -22,7 +22,7 @@ interface AuthContextType {
   githubLogin: () => Promise<void>;
 }
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 interface AuthProviderProps {
   children: ReactNode;

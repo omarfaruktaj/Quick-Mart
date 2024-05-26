@@ -1,8 +1,8 @@
 import { FormEvent, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/use-auth";
-import SocialLogin from "../../components/layout/social-login";
 import toast from "react-hot-toast";
+import SocialLogin from "../../components/social-login";
 
 export default function Login() {
   const auth = useAuth();
@@ -15,16 +15,22 @@ export default function Login() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const target = e.target as typeof e.target & {
-      email: { value: string };
-      password: { value: string };
-    };
-    const email = target.email.value;
-    const password = target.password.value;
+    try {
+      const target = e.target as typeof e.target & {
+        email: { value: string };
+        password: { value: string };
+      };
+      const email = target.email.value;
+      const password = target.password.value;
 
-    await auth?.login(email, password);
+      await auth?.login(email, password);
 
-    toast.success("Successfull login");
+      toast.success("Successfull login");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
   };
   useEffect(() => {
     if (auth?.user) {
@@ -66,7 +72,7 @@ export default function Login() {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Register
+            Login
           </button>
         </div>
       </form>
