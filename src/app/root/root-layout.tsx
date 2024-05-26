@@ -5,8 +5,10 @@ import Footer from "../../components/layout/footer";
 export default function RootLayout() {
   return (
     <div>
-      <Navbar />
-      <Outlet />
+      <div className="container mx-auto">
+        <Navbar />
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

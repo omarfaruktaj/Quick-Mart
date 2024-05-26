@@ -9,7 +9,7 @@ export default function Header() {
     toast.success("Successfully logout.");
   };
   return (
-    <header className="bg-white shadow p-4">
+    <header className="border-b border-b-gray-700 shadow p-4">
       <div className="flex justify-end items-center">
         <h1 className="text-2xl font-bold"></h1>
         <button onClick={handleLogout} className="btn btn-error ">

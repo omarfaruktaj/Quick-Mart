@@ -3,8 +3,8 @@ import useAuth from "../../hooks/use-auth";
 export default function Dashboard() {
   const auth = useAuth();
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6">
+    <div className="flex justify-center items-center h-screen ">
+      <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-200 p-6">
         <img
           className="w-24 h-24 rounded-full mx-auto"
           src={auth?.user?.profilePicture}

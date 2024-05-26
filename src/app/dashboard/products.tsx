@@ -15,6 +15,7 @@ interface Product {
 export default function Products() {
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
+
   useEffect(() => {
     const getProducts = async () => {
       const data = await axios("http://localhost:3000/produdcts");
@@ -29,20 +30,22 @@ export default function Products() {
 
   const handleConfirmDelete = async () => {
     // Filter out the selected product from the products list
-    // setProducts(products.filter((product) => product.id !== selectedProduct));
     await axios.delete(`http://localhost:3000/produdcts/${selectedProduct}`);
+    setProducts(products.filter((product) => product.id !== selectedProduct));
+
     toast.success("Product Deleted.");
+
     // Reset selectedProduct to null
     setSelectedProduct(null);
   };
 
   return (
-    <div className="p-8 text-gray-900">
+    <div className="p-8 text-gray-200">
       <div className=" mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-gray-800">Products</h2>
-            <p className=" text-sm text-gray-400">All Products</p>
+            <h2 className="text-3xl font-bold text-gray-200">Products</h2>
+            <p className=" text-sm text-gray-400 py-2">All Products</p>
           </div>
           <div>
             <Link to="create" className="btn btn-secondary">
@@ -50,7 +53,7 @@ export default function Products() {
             </Link>
           </div>
         </div>
-        <div className="w-full h-0.5 bg-black my-4"></div>
+        <div className="w-full h-0.5 bg-gray-700 my-4"></div>
       </div>
       <div className="overflow-x-auto">
         <table className="table">
@@ -88,7 +91,7 @@ export default function Products() {
                     >
                       Details
                     </Link>
-                    <Link to={`${id}/edit`} className="btn btn-primary">
+                    <Link to={`edit/${id}`} className="btn btn-primary">
                       Edit
                     </Link>
                     <button
@@ -108,7 +111,7 @@ export default function Products() {
       {selectedProduct && (
         <div>
           <dialog open className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-white">
+            <div className="modal-box ">
               <h3 className="font-bold text-lg">
                 Do you want to delete this product?
               </h3>

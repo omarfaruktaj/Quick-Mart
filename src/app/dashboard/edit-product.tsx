@@ -1,7 +1,7 @@
 import axios from "axios";
 import ProductForm from "../../components/product-form";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ProductFormData {
   title: string;
@@ -11,15 +11,16 @@ interface ProductFormData {
   image_url: string;
 }
 
-export default function CreateProduct() {
+export default function EditProduct() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const handleSubmit = async (data: ProductFormData) => {
     try {
-      await axios.post("http://localhost:3000/produdcts", {
+      await axios.patch(`http://localhost:3000/produdcts/${id}`, {
         ...data,
       });
       navigate("/dashboard/products");
-      toast.success("Product successfully created.");
+      toast.success("Product successfully updated.");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -28,7 +29,7 @@ export default function CreateProduct() {
   };
   return (
     <div>
-      <ProductForm onSubmit={handleSubmit} />
+      <ProductForm productId={id} onSubmit={handleSubmit} />
     </div>
   );
 }

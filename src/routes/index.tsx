@@ -9,6 +9,9 @@ import Dashboard from "../app/dashboard/dashboard";
 import DashboardLayout from "../app/dashboard/dashboard-layout";
 import DashboardProducts from "../app/dashboard/products";
 import Products from "../app/root/products";
+import PorductDetails from "../components/product-details";
+import CreateProduct from "../app/dashboard/create-product";
+import EditProduct from "../app/dashboard/edit-product";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "products/:id",
+        element: <PorductDetails />,
       },
       {
         path: "",
@@ -59,6 +66,18 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <DashboardProducts />,
+      },
+      {
+        path: "products/create",
+        element: <CreateProduct />,
+      },
+      {
+        path: "products/edit/:id",
+        element: <EditProduct />,
+      },
+      {
+        path: "products/:id",
+        element: <PorductDetails />,
       },
     ],
   },

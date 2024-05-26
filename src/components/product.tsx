@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface Product {
   id: number;
   title: string;
@@ -7,7 +9,7 @@ interface Product {
   image_url: string;
 }
 export default function Product({ product }: { product: Product }) {
-  const { brand, description, title, image_url, price } = product;
+  const { id, brand, description, title, image_url, price } = product;
 
   return (
     <div className="card  bg-base-100 shadow-xl">
@@ -20,7 +22,9 @@ export default function Product({ product }: { product: Product }) {
         <p>{description}</p>
         <p>${price}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Details</button>
+          <Link to={String(id)} className="btn btn-primary">
+            Details
+          </Link>
         </div>
       </div>
     </div>
