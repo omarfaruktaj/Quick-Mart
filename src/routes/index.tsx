@@ -12,6 +12,8 @@ import Products from "../app/root/products";
 import PorductDetails from "../components/product-details";
 import CreateProduct from "../app/dashboard/create-product";
 import EditProduct from "../app/dashboard/edit-product";
+import AboutUs from "../app/root/about-us";
+import Blogs from "../components/home/blogs";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +33,12 @@ const router = createBrowserRouter([
         element: <PorductDetails />,
       },
       {
-        path: "",
-        element: <Home />,
+        path: "about-us",
+        element: <AboutUs />,
+      },
+      {
+        path: "blogs",
+        element: <Blogs />,
       },
       {
         path: "",

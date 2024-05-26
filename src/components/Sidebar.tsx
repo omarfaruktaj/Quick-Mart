@@ -20,8 +20,8 @@ export default function Sidebar() {
       label: "Products",
     },
     {
-      path: "orders",
-      label: "Orders",
+      path: "products/create",
+      label: "Create Product",
     },
   ];
 

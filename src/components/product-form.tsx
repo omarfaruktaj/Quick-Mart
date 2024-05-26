@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 interface ProductFormProps {
-  productId?: string;
+  productId?: number;
   onSubmit: (data: ProductFormData) => void;
 }
 
@@ -47,6 +47,15 @@ const ProductForm = ({ productId, onSubmit }: ProductFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const confirmed = confirm(
+      `Are you sure? Do you want to ${
+        productId ? "update" : "create"
+      } this product?`
+    );
+    if (!confirmed) {
+      return;
+    }
+
     onSubmit(formData);
   };
 

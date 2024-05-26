@@ -24,8 +24,12 @@ export default function Navbar() {
       label: "Products",
     },
     {
-      path: "about",
+      path: "about-us",
       label: "About",
+    },
+    {
+      path: "blogs",
+      label: "Blogs",
     },
 
     {

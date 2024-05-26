@@ -22,7 +22,7 @@ export default function Product({ product }: { product: Product }) {
         <p>{description}</p>
         <p>${price}</p>
         <div className="card-actions justify-end">
-          <Link to={String(id)} className="btn btn-primary">
+          <Link to={`/products/${id}`} className="btn btn-primary">
             Details
           </Link>
         </div>
