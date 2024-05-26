@@ -1,12 +1,36 @@
-import { FormEvent } from "react";
-import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { FormEvent, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/use-auth";
+import SocialLogin from "../../components/layout/social-login";
+import toast from "react-hot-toast";
 
 export default function Register() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const auth = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location?.state?.from?.pathname || "/";
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const target = e.target as typeof e.target & {
+      email: { value: string };
+      password: { value: string };
+    };
+    const email = target.email.value;
+    const password = target.password.value;
+
+    await auth?.createUser(email, password);
+
+    toast.success("Successfully registered.");
   };
+  useEffect(() => {
+    if (auth?.user) {
+      navigate(from, { replace: true });
+    }
+  }, [auth?.user, from, navigate]);
 
   return (
     <div className="max-w-md w-full rounded-md shadow-md p-6 space-y-8">
@@ -18,17 +42,6 @@ export default function Register() {
       <form className="mt-8  space-y-6" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full space-y-6">
           <div>
-            <label className="text-gray-600" htmlFor="name">
-              Name:{" "}
-            </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter you name"
-              className="input input-bordered bg-inherit w-full  max-w-md"
-            />
-          </div>
-          <div>
             <label className="text-gray-600" htmlFor="email">
               Email:{" "}
             </label>
@@ -36,6 +49,7 @@ export default function Register() {
             <input
               type="email"
               name="email"
+              required
               placeholder="Enter you email"
               className="input input-bordered bg-inherit w-full max-w-md"
             />
@@ -48,6 +62,7 @@ export default function Register() {
             <input
               type="password"
               name="password"
+              required
               placeholder="Enter you password"
               className="input input-bordered bg-inherit w-full max-w-md"
             />
@@ -59,17 +74,7 @@ export default function Register() {
       </form>
       <div className="h-0.5 w-full bg-black"></div>
 
-      <div className="flex flex-col gap-3">
-        <button className="btn btn-accent">
-          {" "}
-          <FcGoogle className="h-5 w-5" />
-          Continue with google
-        </button>
-        <button className="btn btn-outline">
-          <FaGithub className="h-5 w-5" />
-          Continue with github
-        </button>
-      </div>
+      <SocialLogin />
 
       <div className="">
         Already have an accoutn?

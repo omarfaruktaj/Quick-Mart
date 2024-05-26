@@ -1,10 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/use-auth";
+import toast from "react-hot-toast";
 
 interface Routes {
   path: string;
   label: string;
+  isPrivate?: boolean;
 }
 export default function Navbar() {
+  const auth = useAuth();
+
+  const handleLogout = async () => {
+    await auth?.logout();
+    toast.success("Successfull logout.");
+  };
   const routes: Routes[] = [
     {
       path: "/",
@@ -77,7 +86,22 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">LogIn</a>
+        {auth?.user ? (
+          <button onClick={handleLogout} className="btn">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="btn">
+            Login
+          </Link>
+        )}
+        {auth?.user?.photoURL && (
+          <div className="avatar">
+            <div className="w-12 rounded-full border-2 border-black">
+              <img src={auth?.user?.photoURL || "/public/placeholder.jpg"} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
