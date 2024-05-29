@@ -2,6 +2,9 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/use-auth";
 import toast from "react-hot-toast";
 import { FaUserCircle } from "react-icons/fa";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+const MySwal = withReactContent(Swal);
 
 interface Routes {
   path: string;
@@ -12,8 +15,18 @@ export default function Navbar() {
   const auth = useAuth();
 
   const handleLogout = async () => {
-    await auth?.logout();
-    toast.success("Successfull logout.");
+    const result = await MySwal.fire({
+      title: "Are you sure?",
+      text: "Do you want to logout out?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, logout!",
+      cancelButtonText: "No, cancel!",
+    });
+    if (result.isConfirmed) {
+      await auth?.logout();
+      toast.success("Successfull logout.");
+    }
   };
   const routes: Routes[] = [
     {
