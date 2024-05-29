@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/use-auth";
 import toast from "react-hot-toast";
+import { FaUserCircle } from "react-icons/fa";
 
 interface Routes {
   path: string;
@@ -38,6 +39,7 @@ export default function Navbar() {
       isPrivate: !auth?.user,
     },
   ];
+  const profilePicture = auth?.user?.photoURL;
 
   return (
     <div className="navbar bg-base-100">
@@ -80,7 +82,9 @@ export default function Navbar() {
             )}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">QUICK MART</a>
+        <Link to="/" className="btn btn-ghost text-xl">
+          QUICK MART
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -103,20 +107,24 @@ export default function Navbar() {
       </div>
       <div className="navbar-end">
         {auth?.user ? (
-          <button onClick={handleLogout} className="btn">
-            Logout
-          </button>
+          <div className="flex items-center justify-center gap-4">
+            {profilePicture ? (
+              <img
+                className="w-24 h-24 rounded-full "
+                src={profilePicture}
+                alt={"User profile image"}
+              />
+            ) : (
+              <FaUserCircle className="h-8 w-8 " />
+            )}
+            <button onClick={handleLogout} className="btn">
+              Logout
+            </button>
+          </div>
         ) : (
           <Link to="/login" className="btn">
             Login
           </Link>
-        )}
-        {auth?.user?.photoURL && (
-          <div className="avatar">
-            <div className="w-12 rounded-full border-2 border-black">
-              <img src={auth?.user?.photoURL || "/public/placeholder.jpg"} />
-            </div>
-          </div>
         )}
       </div>
     </div>

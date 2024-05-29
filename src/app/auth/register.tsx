@@ -39,7 +39,7 @@ export default function Register() {
   }, [auth?.user, from, navigate]);
 
   return (
-    <div className="max-w-md w-full rounded-md shadow-md p-6 space-y-8">
+    <div className="max-w-md bg-base-200  w-full rounded-2xl shadow-md p-6 space-y-8">
       <div>
         <h2 className="mt-6 text-center text-3xl font-extrabold ">Register</h2>
       </div>

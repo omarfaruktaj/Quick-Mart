@@ -39,7 +39,7 @@ export default function Login() {
   }, [auth?.user, from, navigate]);
 
   return (
-    <div className="max-w-md w-full rounded-md shadow-md p-6 space-y-8">
+    <div className="max-w-md w-full bg-base-200 rounded-2xl shadow-md p-6 space-y-8">
       <div>
         <h2 className="mt-6 text-center text-3xl font-extrabold ">Login</h2>
       </div>
